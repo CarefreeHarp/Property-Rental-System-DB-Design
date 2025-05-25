@@ -39,7 +39,7 @@ begin
 
     EXCEPTION
     when no_data_found then
-        raise_application_error(-20004, 'No data found in tables'); --When no tuples are registered in the tables
+        raise_application_error(-20004, 'No data found in tables'); -- When no tuples are registered in the tables
     when others then
         raise_application_error(-20005, 'An unexpected error occurred:');
 end;
