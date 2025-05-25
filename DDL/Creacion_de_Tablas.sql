@@ -136,4 +136,4 @@ CREATE TABLE Additional_Service (
     PRIMARY KEY (client_id, service_name),
     FOREIGN KEY (client_id) REFERENCES Client(client_id) ON DELETE CASCADE,
     FOREIGN KEY (service_name) REFERENCES Service(service_name) ON DELETE CASCADE
-);
+);--
