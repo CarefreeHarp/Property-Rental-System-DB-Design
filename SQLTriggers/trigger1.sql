@@ -1,4 +1,4 @@
-create or replace trigger update_rent_availableness after
+create or replace trigger Update_Rent_Availableness after
    insert or delete on contract
    for each row
 begin
