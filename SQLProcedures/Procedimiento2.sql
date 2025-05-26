@@ -29,7 +29,10 @@ begin
     update property set available = 'N' where property_id = idproperty;
 
     --Calculates the contract's Total Payment Value including the additional services that the client picked
-    TPV_per_Month := Calculate_TPV_per_Month(idclient, idproperty);
+    select base_rent into TPV_per_Month from Property where property_id = idproperty;
+
+    select NVL(sum(value),0) into sum_of_services from ADDITIONAL_SERVICE where client_id = idclient;
+    TPV_per_Month := TPV_per_Month + sum_of_services;
 
     --Creates the contract
     insert into contract (client_id, property_id, TPV_per_Month) values (idclient, idproperty, TPV_per_Month);
