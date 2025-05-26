@@ -8,7 +8,9 @@ begin
     select count(property_id)
     into v_cuantity_visits
     from visit v
-    where v.property_id = visit_record.property_id
+    where v.property_id = visit_record.property_id 
+    and v.start_time >= visit_record.start_date
+    and v.end_time <= visit_record.end_date
     group by v.property_id;
     return v_cuantity_visits;
 exception
