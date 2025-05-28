@@ -1,0 +1,34 @@
+CREATE OR REPLACE PROCEDURE Gestionar_Servicios_Adicionales (
+    p_id_contrato IN NUMBER,
+    p_id_servicio IN NUMBER,
+    p_num_inquilinos IN NUMBER,
+    p_accion IN VARCHAR2 -- 'AGREGAR', 'MODIFICAR', 'ELIMINAR'
+) AS
+    v_costo_total NUMBER := 0;
+BEGIN
+    IF p_accion = 'AGREGAR' THEN
+        INSERT INTO Contrato_Servicio (id_contrato, id_servicio, num_inquilinos)
+        VALUES (p_id_contrato, p_id_servicio, p_num_inquilinos);
+    ELSIF p_accion = 'MODIFICAR' THEN
+        UPDATE Contrato_Servicio
+        SET num_inquilinos = p_num_inquilinos
+        WHERE id_contrato = p_id_contrato AND id_servicio = p_id_servicio;
+    ELSIF p_accion = 'ELIMINAR' THEN
+        DELETE FROM Contrato_Servicio
+        WHERE id_contrato = p_id_contrato AND id_servicio = p_id_servicio;
+    ELSE
+        RAISE_APPLICATION_ERROR(-20001, 'Acción no válida. Use AGREGAR, MODIFICAR o ELIMINAR.');
+    END IF;
+
+    -- Recalcular el costo total del contrato
+    SELECT SUM(s.costo_unitario * cs.num_inquilinos)
+    INTO v_costo_total
+    FROM Contrato_Servicio cs
+    JOIN Servicio s ON cs.id_servicio = s.id_servicio
+    WHERE cs.id_contrato = p_id_contrato;
+
+    UPDATE Contrato
+    SET costo_total = v_costo_total
+    WHERE id_contrato = p_id_contrato;
+END;
+/
