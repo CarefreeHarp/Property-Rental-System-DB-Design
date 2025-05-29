@@ -125,11 +125,13 @@ CREATE TABLE Contract(
     client_id VARCHAR2(10) NOT NULL,
     property_id VARCHAR2(10) NOT NULL,
     TPV_per_Month NUMBER(8,2) DEFAULT 0 NOT NULL CHECK (TPV_per_Month >= 0),
-    PRIMARY KEY (contract_id,client_id),
+    start_date DATE DEFAULT TRUNC(SYSDATE) NOT NULL,
+    end_date DATE DEFAULT TRUNC(SYSDATE) NOT NULL,
+    PRIMARY KEY (contract_id, client_id),
+    CONSTRAINT unique_propertyid unique (property_id),
     FOREIGN KEY (property_id) REFERENCES Property(property_id) ON DELETE CASCADE,
     FOREIGN KEY (client_id) REFERENCES Client(client_id) ON DELETE CASCADE
-)
-
+);
 
 CREATE TABLE Additional_Service (
     client_id VARCHAR2(10) NOT NULL,
