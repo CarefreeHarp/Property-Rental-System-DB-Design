@@ -119,14 +119,15 @@ CREATE TABLE Rent_solicitude (
 );
 
 CREATE TABLE Contract(
-
-    contract_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY ,
+    contract_id NUMBER GENERATED ALWAYS AS IDENTITY,
     client_id VARCHAR2(10) NOT NULL,
     property_id VARCHAR2(10) NOT NULL,
     TPV_per_Month NUMBER(8,2) DEFAULT 0 NOT NULL CHECK (TPV_per_Month >= 0),
+    PRIMARY KEY (contract_id,client_id),
     FOREIGN KEY (property_id) REFERENCES Property(property_id) ON DELETE CASCADE,
     FOREIGN KEY (client_id) REFERENCES Client(client_id) ON DELETE CASCADE
-);
+)
+
 
 CREATE TABLE Additional_Service (
     client_id VARCHAR2(10) NOT NULL,
@@ -136,21 +137,6 @@ CREATE TABLE Additional_Service (
     PRIMARY KEY (client_id, service_name),
     FOREIGN KEY (client_id) REFERENCES Client(client_id) ON DELETE CASCADE,
     FOREIGN KEY (service_name) REFERENCES Service(service_name) ON DELETE CASCADE
-);
-
-CREATE TABLE Taxes(
-    tax_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    tax_name VARCHAR2(50) NOT NULL,
-    applicable_value NUMBER(6,5) NOT NULL,
-    CONSTRAINT unique_tax_name UNIQUE (tax_name)
-);
-
-CREATE TABLE Registered_Taxes(
-    tax_id NUMBER NOT NULL,
-    contract_id  NUMBER NOT NULL,
-    PRIMARY KEY (tax_id, contract_id),
-    FOREIGN KEY (tax_id) REFERENCES Taxes(tax_id) ON DELETE CASCADE,
-    FOREIGN KEY (contract_id) REFERENCES Contract(contract_id) ON DELETE CASCADE
 );
 
 CREATE TABLE Additional_Rates ( -- Tabla que incluye la informacion de tarifas adicionales como impuestos o cosas como la administración de las casas
