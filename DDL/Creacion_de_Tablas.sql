@@ -136,4 +136,38 @@ CREATE TABLE Additional_Service (
     PRIMARY KEY (client_id, service_name),
     FOREIGN KEY (client_id) REFERENCES Client(client_id) ON DELETE CASCADE,
     FOREIGN KEY (service_name) REFERENCES Service(service_name) ON DELETE CASCADE
-);--
+);
+
+CREATE TABLE Taxes(
+    tax_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    tax_name VARCHAR2(50) NOT NULL,
+    applicable_value NUMBER(6,5) NOT NULL,
+    CONSTRAINT unique_tax_name UNIQUE (tax_name)
+);
+
+CREATE TABLE Registered_Taxes(
+    tax_id NUMBER NOT NULL,
+    contract_id  NUMBER NOT NULL,
+    PRIMARY KEY (tax_id, contract_id),
+    FOREIGN KEY (tax_id) REFERENCES Taxes(tax_id) ON DELETE CASCADE,
+    FOREIGN KEY (contract_id) REFERENCES Contract(contract_id) ON DELETE CASCADE
+);
+
+CREATE TABLE Additional_Rates_And_Taxes (
+    rate_name VARCHAR2(50) PRIMARY KEY,
+    rate_value NUMBER(7,2) NOT NULL CHECK (rate_value >= 0),
+    unit VARCHAR2(10) DEFAULT '%' NOT NULL CHECK (unit IN ('%')),
+    rate_type VARCHAR2(20) DEFAULT '-' NOT NULL CHECK (rate_type IN ('TAX', 'COMMISSION')),
+    description VARCHAR2(100) DEFAULT '-' NOT NULL
+); 
+
+CREATE TABLE Control_Changes (
+    change_id     NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    table_name    VARCHAR2(50),         -- Nombre de la tabla modificada (ej. 'Client', 'Property')
+    record_id     VARCHAR2(10),         -- ID del registro afectado (ej. client_id, property_id)
+    action_type   VARCHAR2(10),         -- 'UPDATE', 'INSERT', 'DELETE'
+    change_date   DATE DEFAULT SYSDATE, -- Fecha del cambio
+    column_name   VARCHAR2(50),         -- Nombre del atributo modificado
+    old_value     VARCHAR2(500),        
+    new_value     VARCHAR2(500)         
+);
