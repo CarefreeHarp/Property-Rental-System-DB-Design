@@ -171,5 +171,4 @@ CREATE TABLE Control_Changes (
     column_name   VARCHAR2(50),         -- Nombre del atributo modificado
     old_value     VARCHAR2(500),        
     new_value     VARCHAR2(500)         
-); 
---Prueba
+);
