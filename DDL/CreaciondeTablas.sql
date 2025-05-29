@@ -40,6 +40,8 @@ CREATE TABLE Property (
     address VARCHAR2(30) DEFAULT '-' NOT NULL,
     base_rent NUMBER(7,2) DEFAULT 0 NOT NULL CHECK (base_rent >= 0),
     availability_date DATE DEFAULT TRUNC(SYSDATE) NOT NULL,
+    discount NUMBER(10,5) DEFAULT 0 NOT NULL CHECK (discount >= 0),
+    discount_type VARCHAR2(10) DEFAULT '-' NOT NULL CHECK (discount_type IN ('PERCENTAGE', 'VALUE')), 
     FOREIGN KEY (owner_id) REFERENCES Owner(owner_id) ON DELETE CASCADE,
     CONSTRAINT unique_address UNIQUE (address)
 );
@@ -158,3 +160,4 @@ CREATE TABLE Control_Changes (
     old_value     VARCHAR2(500),        
     new_value     VARCHAR2(500)         
 );
+
