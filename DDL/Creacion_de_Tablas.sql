@@ -153,13 +153,14 @@ CREATE TABLE Registered_Taxes(
     FOREIGN KEY (contract_id) REFERENCES Contract(contract_id) ON DELETE CASCADE
 );
 
-CREATE TABLE Additional_Rates_And_Taxes (
+CREATE TABLE Additional_Rates ( -- Tabla que incluye la informacion de tarifas adicionales como impuestos o cosas como la administración de las casas
     rate_name VARCHAR2(50) PRIMARY KEY,
     rate_value NUMBER(7,2) NOT NULL CHECK (rate_value >= 0),
     unit VARCHAR2(10) DEFAULT '%' NOT NULL CHECK (unit IN ('%')),
     rate_type VARCHAR2(20) DEFAULT '-' NOT NULL CHECK (rate_type IN ('TAX', 'COMMISSION')),
     description VARCHAR2(100) DEFAULT '-' NOT NULL
 ); 
+
 
 CREATE TABLE Control_Changes (
     change_id     NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
