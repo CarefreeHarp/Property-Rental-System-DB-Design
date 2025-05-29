@@ -2,7 +2,7 @@
 
 -- Cliente CLI0000001
 -- PROP000001: Servicio LIMPIEZA (150×3=450) para los pagos P0001–P0006
-INSERT INTO Additional_Service (client_id, service_name, num_people, value) VALUES ('CLI0000001', 'LIMPIEZA', 3, 450.00); 
+INSERT INTO Additional_Service (client_id, service_name, num_people, value) VALUES ('CLI0000001', 'LIMPIEZA', 3, 450.00);
 
 -- Para PROP000005: Servicio LAVANDERÍA (100×5=500) para los pagos P0007–P0012
 INSERT INTO Additional_Service (client_id, service_name, num_people, value) VALUES ('CLI0000001', 'LAVANDERIA', 5, 500.00);
