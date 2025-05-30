@@ -22,3 +22,4 @@ BEGIN
           'Owner cannot be deleted: non-deleted properties or active contracts exist.');
     END IF;
 END;
+/
