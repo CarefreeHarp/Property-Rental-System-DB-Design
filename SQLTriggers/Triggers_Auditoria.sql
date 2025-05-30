@@ -28,6 +28,13 @@ BEGIN
 END;   
 /
 
+
+
+
+
+
+
+
 --Trigger 5 Auditoria Property 
 CREATE OR REPLACE TRIGGER trg_audit_property_
 AFTER INSERT OR UPDATE OR DELETE ON Property
