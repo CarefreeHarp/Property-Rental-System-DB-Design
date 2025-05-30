@@ -1,4 +1,4 @@
-create or replace trigger discount before
+create or replace trigger TGR_DISCOUNT before
    update or insert on contract
    for each row
 declare
