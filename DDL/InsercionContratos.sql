@@ -28,7 +28,7 @@ INSERT INTO Contract (client_id, property_id, start_date, end_date) VALUES
 ('CLI0000009', 'PROP000009', TO_DATE('2025-05-29', 'YYYY-MM-DD'), TO_DATE('2025-05-29', 'YYYY-MM-DD'));
 
 INSERT INTO Contract (client_id, property_id, start_date, end_date) VALUES 
-('CLI0000010', 'PROP0000010', TO_DATE('2025-05-29', 'YYYY-MM-DD'), TO_DATE('2025-05-29', 'YYYY-MM-DD'));
+('CLI0000010', 'PROP000010', TO_DATE('2025-05-29', 'YYYY-MM-DD'), TO_DATE('2025-05-29', 'YYYY-MM-DD'));
 
 INSERT INTO Contract (client_id, property_id, start_date, end_date) VALUES 
 ('CLI0000011', 'PROP000011', TO_DATE('2025-05-29', 'YYYY-MM-DD'), TO_DATE('2025-05-29', 'YYYY-MM-DD'));
