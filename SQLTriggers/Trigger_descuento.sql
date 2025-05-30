@@ -1,4 +1,4 @@
-create or replace trigger discount before
+create or replace trigger TGR_DISCOUNT before
    update or insert on contract
    for each row
 declare
@@ -53,6 +53,11 @@ begin
             :new.client_id,
             :new.property_id
          ) - v_discount_value;
+      else
+         :new.tpv_per_month := calculate_tpv_per_month(
+            :new.client_id,
+            :new.property_id
+         );
       end if;
    end if;
 end;
