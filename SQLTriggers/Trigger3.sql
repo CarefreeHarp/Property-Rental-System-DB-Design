@@ -18,7 +18,7 @@ BEGIN
     WHERE p.owner_id = :OLD.owner_id;
 
     IF v_not_deleted_props > 0 OR v_active_contracts > 0 THEN
-        RAISE_APPLICATION_ERROR(
+        RAISE_APPLICATION_ERROR(404,
           'Owner cannot be deleted: non-deleted properties or active contracts exist.');
     END IF;
 END;
