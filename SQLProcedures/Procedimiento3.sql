@@ -37,7 +37,7 @@ BEGIN
 
     -- Actualizar contrato
     UPDATE Contract
-    SET TPV_per_Month = Calculate_TPV(p_client_id, v_property_id)
+    SET TPV_per_Month = CALCULATE_TPV_PER_MONTH(p_client_id, v_property_id)
     WHERE contract_id = p_contract_id;
 
     DBMS_OUTPUT.PUT_LINE('Contract updated successfully. New TPV: ' || (v_base_rent + v_total_services));
