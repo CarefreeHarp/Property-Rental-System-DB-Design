@@ -222,7 +222,7 @@ create table notification (
    hour_date date default trunc(sysdate) not null,
    message   varchar2(500) default '-' not null,
    typology  varchar2(100) default '-' not null check ( typology in ( 'WAITING LIST',
-                                                                     'SIGNED CONTRACT',
+                                                                     'FIRMED CONTRACT',
                                                                      'RENT SOLICITUDE',
                                                                      'SUCCESSFULL PAYMENT',
                                                                      'UPDATED PROPERTY' ) ),
