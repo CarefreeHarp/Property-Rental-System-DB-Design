@@ -163,3 +163,17 @@ CREATE TABLE Control_Changes (
     old_value     VARCHAR2(500),        
     new_value     VARCHAR2(500)         
 );
+
+create table notification (
+   hour_date date default trunc(sysdate) not null,
+   message   varchar2(500) default '-' not null,
+   typology  varchar2(100) default '-' not null check ( typology in ( 'WAITING LIST',
+                                                                     'SIGNED CONTRACT',
+                                                                     'RENT SOLICITUDE',
+                                                                     'SUCCESSFULL PAYMENT',
+                                                                     'UPDATED PROPERTY' ) ),
+   username  varchar2(20) default '-' not null,
+   foreign key ( username )
+      references account_information ( username )
+         on delete cascade
+);
