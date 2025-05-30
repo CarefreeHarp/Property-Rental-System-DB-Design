@@ -35,19 +35,9 @@ BEGIN
     FROM Contract
     WHERE contract_id = p_contract_id;
 
-    -- Obtener renta base
-    SELECT base_rent INTO v_base_rent
-    FROM Property
-    WHERE property_id = v_property_id;
-
-    -- Sumar servicios
-    SELECT NVL(SUM(value), 0) INTO v_total_services
-    FROM Additional_Service
-    WHERE client_id = p_client_id;
-
     -- Actualizar contrato
     UPDATE Contract
-    SET TPV_per_Month = v_base_rent + v_total_services
+    SET TPV_per_Month = Calculate_TPV(p_client_id, v_property_id)
     WHERE contract_id = p_contract_id;
 
     DBMS_OUTPUT.PUT_LINE('Contract updated successfully. New TPV: ' || (v_base_rent + v_total_services));
