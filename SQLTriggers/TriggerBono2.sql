@@ -15,7 +15,7 @@ begin
       username
    ) values ( sysdate,
               'Your contract has been created',
-              'FIRMED CONTRACT',
+              'SIGNED CONTRACT',
               v_username );
    commit;
 end;
