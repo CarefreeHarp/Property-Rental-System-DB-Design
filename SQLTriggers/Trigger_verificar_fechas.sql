@@ -1,4 +1,4 @@
-create or replace trigger trigger_verificar_fecha
+create or replace trigger TGR_VERIFY_DATES
 before insert or update on contract 
 for each ROW
 declare v_fecha_inicio date;
