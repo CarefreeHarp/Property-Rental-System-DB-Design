@@ -53,6 +53,11 @@ begin
             :new.client_id,
             :new.property_id
          ) - v_discount_value;
+      else
+         :new.tpv_per_month := calculate_tpv_per_month(
+            :new.client_id,
+            :new.property_id
+         );
       end if;
    end if;
 end;
